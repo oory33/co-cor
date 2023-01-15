@@ -26,7 +26,7 @@ for (fname in fnames) {
   setwd("/Users/ryo/Documents/R/R_study/co-cor/out")
   png(sprintf("%s.png", substring(fname, 1, (nchar(fname) - 4))), width = 1080, height = 1080)
   par(mgp = c(2.3, 0.7, 0))
-  plot(t, cor_dat, xlim = c(0, 2), type = "p", ylab = "IAC", xlab = "time(sec)", cex.lab = 1.7, cex.axis = 1.5, ylim = c(-1, 1)) # ,main = sprintf("%s", fname))
+  plot(t, cor_dat * (-1), xlim = c(0, 1), type = "p", ylab = "IAC", xlab = "time(sec)", cex.lab = 1.7, cex.axis = 1.5, ylim = c(-1, 1)) # ,main = sprintf("%s", fname))
   dev.off()
   setwd("/Users/ryo/Documents/R/R_study/co-cor/input")
 }
