@@ -1,4 +1,5 @@
-setwd("/Users/ryo/Documents/R/R_study/co-cor/input")
+cwd <- getwd()
+setwd(paste(cwd, "/input", sep = ""))
 library(tuneR)
 
 win_ln <- 2 / 1000 * 48000 ## sample
@@ -8,6 +9,7 @@ pwd <- sprintf("%s", getwd())
 fnames <- list.files(path = pwd, pattern = "*.wav")
 
 for (fname in fnames) {
+  setwd(paste(cwd, "/input", sep = ""))
   wav_l <- readWave(fname)@left
   wav_r <- readWave(fname)@right
   fs <- readWave(fname)@samp.rate
@@ -23,10 +25,9 @@ for (fname in fnames) {
     i <- i + 1
   }
   t <- seq(0, ln / fs, length = ln / win_ln)
-  setwd("/Users/ryo/Documents/R/R_study/co-cor/out")
+  setwd(paste(cwd, "out", sep = "/"))
   png(sprintf("%s.png", substring(fname, 1, (nchar(fname) - 4))), width = 1080, height = 1080)
   par(mgp = c(2.3, 0.7, 0))
   plot(t, cor_dat * (-1), xlim = c(0, 1), type = "p", ylab = "IAC", xlab = "time(sec)", cex.lab = 1.7, cex.axis = 1.5, ylim = c(-1, 1)) # ,main = sprintf("%s", fname))
   dev.off()
-  setwd("/Users/ryo/Documents/R/R_study/co-cor/input")
 }
